@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t Dockerfile .'
+                sh 'docker build -t mayusharathod/java-app:v1 .'
             }
         }
         stage('Push Docker Image') {
