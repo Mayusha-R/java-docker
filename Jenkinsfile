@@ -13,10 +13,11 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-		withCredentials([usernamePassword(credentialsId: 'dockerID')]) {
-                    sh ' docker login'
-                    sh 'docker push mayusharathod/java-app:v1'
-		}
+		script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKER_ID}") {
+                        docker.image('mayusharathod/java-app:v1').push('v1')
+                    }
+                }
             }
         }
         stage('Deploy Container') {
